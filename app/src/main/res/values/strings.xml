@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Market </string>
+    <string name="category">Categry</string>
+    <string name="title_account">Account</string>
+    <string name="Shopping">Shopping</string>
+    <string name="title_information">Information</string>
+</resources>
