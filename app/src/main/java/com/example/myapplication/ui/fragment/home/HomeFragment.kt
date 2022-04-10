@@ -1,5 +1,6 @@
-package com.example.myapplication.ui.fragment
+package com.example.myapplication.ui.fragment.home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,19 +15,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.Resource
-import com.example.myapplication.data.RoomDao
+import com.example.myapplication.data.entitiy.CartDataEntity
+import com.example.myapplication.data.entitiy.DataX
+import com.example.myapplication.data.local.RoomDao
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.databinding.LayHomeDialogBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.SlidingAdapter
+import com.example.myapplication.ui.fragment.detail.DetailFragment
+import com.example.myapplication.utils.FragmentUtil
 import com.example.shopping.ui.adapter.ProductAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
-import java.util.regex.Pattern
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
+    private lateinit var productItem: DataX
     private lateinit var binding: FragmentHomeBinding
     lateinit var homeVm: HomeViewModel
 
@@ -34,12 +43,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
     private var slidingImageAdapter: SlidingAdapter? = null
     private var urls: MutableList<String> = mutableListOf()
 
+    @Inject
+    lateinit var roomDao: RoomDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       //0 val matcher = Pattern.compile(ch.toString()).matcher(s)
+        //0 n  val matcher = Pattern.compile(ch.toString()).matcher(s)
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -47,6 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             container,
             false
         )
+       // viewModel = activity?.let { ViewModelProvider(it).get(WishListViewModel::class.java) }!!
 
         homeVm = activity?.let { ViewModelProvider(it).get(HomeViewModel::class.java) }!!
         activity?.let { homeVm.setActivity(it) }
@@ -59,7 +71,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
     private fun initViews() {
         //    binding.pbHome.visibility = View.VISIBLE
         binding.dotsIndicator.visibility = View.GONE
-        val roomDao = RoomDao()
         adapter = ProductAdapter(roomDao, requireContext(), this)
         binding.RecHomeProduct.init(requireContext(), adapter, 2)
         homeVm.getProducts()
@@ -68,12 +79,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             launch {
                 homeVm.bannerList.collect() {
                     urls.clear()
-                    if(it.data != null){
-                    for (x in it.data!!) {
-                        urls.add(x.image)
-                        slidingImageAdapter?.notifyDataSetChanged()
+                    if (it.data != null) {
+                        for (x in it.data!!) {
+                            urls.add(x.image)
+                            slidingImageAdapter?.notifyDataSetChanged()
 
-                    }}
+                        }
+                    }
                 }
             }
         }
@@ -100,35 +112,21 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
                 }
             }
         })
+        //    val mDialogFavorite: CheckBox = dialog.findViewById(R.id.iv_favorite_dialog)
+
     }
 
-    private fun initSlider(urls: List<String>) {
-        /* slidingImageAdapter = SlidingAdapter(requireContext(), urls)
+    fun initSlider(urls: MutableList<String>) {
+
+        slidingImageAdapter = SlidingAdapter(requireContext(), this.urls)
         binding.viewpager.adapter = slidingImageAdapter
-        binding.dotsIndicator.setViewPager(binding.viewpager)
-        numPages = urls.size
-        update = Runnable {
-            if (currentPage == numPages) {
-                currentPage = 0
-            }
-            binding.pager.setCurrentItem(currentPage++, true)
-        }
-        val swipeTimer = Timer()
-        swipeTimer.schedule(object : TimerTask() {
-            override fun run() {
-                Handler(Looper.getMainLooper()).post(update!!)
-            }
-        }, 5000, 5000)
-    }*/
-        slidingImageAdapter = SlidingAdapter(requireContext(), urls)
-        binding.viewpager.adapter = slidingImageAdapter
-        binding.dotsIndicator.visibility= View.VISIBLE
+        binding.dotsIndicator.visibility = View.VISIBLE
         binding.dotsIndicator.setViewPager(binding.viewpager)
         val swipeTimer = Timer()
 
         swipeTimer.schedule(object : TimerTask() {
             override fun run() {
-              //  Handler(Looper.getMainLooper()).post(update!!)
+                //  Handler(Looper.getMainLooper()).post(update!!)
             }
         }, 5000, 5000)
     }
@@ -162,6 +160,76 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
     }
 
     override fun onItemClickListener(view: View, itemId: Int) {
-        TODO("Not yet implemented")
+        productItem = adapter.getProductList()[itemId]!!
+        when (view.id) {
+            R.id.img_list -> showDialog(itemId)
+        }
+    }
+
+    private fun showDialog(itemId: Int) {
+        val dialogBinding: LayHomeDialogBinding? =
+            DataBindingUtil.inflate(
+                LayoutInflater.from(activity),
+                R.layout.lay_home_dialog,
+                null,
+                false
+            )
+        CoroutineScope(Dispatchers.IO).launch {
+            val product = productItem!!.name?.let { roomDao.fetchById(it) }
+            dialogBinding?.ivFavoriteDialog?.isChecked = product != null
+        }
+
+        val customDialog = AlertDialog.Builder(activity, 0).create()
+
+        customDialog.apply {
+            setView(dialogBinding?.root)
+        }.show()
+
+
+
+        dialogBinding?.ivFavoriteDialog?.setOnClickListener {
+            if (dialogBinding.ivFavoriteDialog.isChecked) {
+
+             homeVm.insertFav(productItem)
+                Toast.makeText(activity, getString(R.string.add_to_fav), Toast.LENGTH_LONG).show()
+
+            } else {
+
+                homeVm.deletFav(productItem)
+
+                Toast.makeText(activity, getString(R.string.remove_from_fav), Toast.LENGTH_LONG)
+                    .show()
+
+            }
+            customDialog.dismiss()
+
+        }
+        dialogBinding?.ivFavoriteCart?.setOnClickListener(View.OnClickListener {
+                var cartItem = CartDataEntity(productItem.id
+                    ,productItem.description,
+                  productItem.discount,
+                  productItem.image,
+                  productItem.images,
+                  productItem.in_cart,
+                  productItem.in_favorites,
+                  productItem.name,
+                  productItem.old_price,
+                  productItem.price)
+                homeVm.addToCart(cartItem)
+            customDialog.dismiss()
+            Toast.makeText(activity, getString(R.string.added), Toast.LENGTH_LONG)
+                .show()
+
+        })
+        dialogBinding?.ivFavoriteDetails?.setOnClickListener(View.OnClickListener {
+            val detailFragment = DetailFragment(productItem)
+            activity?.supportFragmentManager?.let {
+                FragmentUtil.replaceFragment(
+                    detailFragment,
+                    R.id.FragmentLoad,
+                    it?.beginTransaction()
+                )
+            }
+        })
     }
 }

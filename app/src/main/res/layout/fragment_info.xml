@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.InfoFragment">
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+
+            android:id="@+id/txt_Info_UpdateAccount"
+            style="@style/InfoTextStyle"
+            android:drawableStart="@drawable/ic_contact"
+            android:gravity="center_vertical"
+            android:text="@string/account_update"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <View
+            android:id="@+id/View_Account"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/grey_90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_Info_UpdateAccount" />
+        <TextView
+
+            android:id="@+id/txt_wishList"
+            style="@style/InfoTextStyle"
+            android:drawableStart="@drawable/ic_favorite"
+            android:gravity="center_vertical"
+            android:text="@string/wish_list"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/View_Account" />
+
+        <View
+            android:id="@+id/View_wish"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/grey_90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/txt_wishList" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+</layout>

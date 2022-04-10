@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.example.myapplication.ui.fragment.HomeViewModel" />
+            type="com.example.myapplication.ui.fragment.home.HomeViewModel" />
 
 
     </data>

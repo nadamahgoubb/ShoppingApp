@@ -1,7 +1,21 @@
 <resources>
     <string name="app_name">Market </string>
-    <string name="category">Categry</string>
+    <string name="category">Category </string>
     <string name="title_account">Account</string>
-    <string name="Shopping">Shopping</string>
+    <string name="cart">Cart </string>
     <string name="title_information">Information</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details">Details</string>
+    <string name="favorite">fav</string>
+    <string name="add_to_fav">"Added To Favorite List "</string>
+    <string name="remove_from_fav">Removed From Favorite List \"</string>
+    <string name="account_update">Update Account</string>
+    <string name="wish_list">Wish List</string>
+    <string name="added">Added Sucessfully</string>
+    <string name="quantity">Quantity</string>
+    <string name="description">Descraption</string>
+    <string name="currency">currency</string>
+    <string name="One">One</string>
+    <string name="remove">remove</string>
 </resources>

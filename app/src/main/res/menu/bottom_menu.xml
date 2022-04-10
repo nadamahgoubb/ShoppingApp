@@ -6,30 +6,29 @@
         android:enabled="true"
         android:icon="@drawable/ic_category"
         android:title="@string/category"
-        app:showAsAction="ifRoom" />
+       />
     <item
         android:id="@+id/navigation_account"
         android:enabled="true"
         android:icon="@drawable/ic_user"
         android:title="@string/title_account"
-        app:showAsAction="ifRoom" />
+       />
 
     <item
         android:id="@+id/navigation_home"
         android:enabled="false"
-        android:title="Home" />
+        android:title="" />
 
     <item
         android:id="@+id/navigation_cart"
         android:enabled="true"
         android:icon="@drawable/ic_cart"
-        android:title="@string/Shopping"
-        app:showAsAction="ifRoom" />
+        android:title="@string/cart" />
     <item
         android:id="@+id/navigation_info"
         android:enabled="true"
         android:icon="@drawable/ic_info"
         android:title="@string/title_information"
-        app:showAsAction="ifRoom" />
+     />
 
 </menu>

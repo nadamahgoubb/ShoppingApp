@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.fragment
+package com.example.myapplication.ui.fragment.home
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.RepoHome
 import com.example.myapplication.Resource
-import com.example.myapplication.data.entitiy.BannerModel
-import com.example.myapplication.data.entitiy.DataBanner
-import com.example.myapplication.data.entitiy.DataX
-import com.example.myapplication.data.entitiy.ProductModel
+import com.example.myapplication.data.entitiy.*
+import com.example.myapplication.data.local.RoomDao
 import com.example.myapplication.utils.NetworkConnectivity
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
-
-class HomeViewModel : ViewModel() {
+import javax.inject.Inject
+@HiltViewModel
+class HomeViewModel @Inject constructor(var room: RoomDao) : ViewModel() {
     private lateinit var repo: RepoHome
     private lateinit var context: Context
 
@@ -114,6 +114,23 @@ class HomeViewModel : ViewModel() {
 
         }else return Resource.Error(response.message())
 
+    }
+    fun addToCart(cartItem: CartDataEntity) {
+      GlobalScope.launch {
+          room.insertInCart(cartItem)
+      }
+    }
+
+    fun insertFav(productItem:DataX) {
+        GlobalScope.launch {
+            room.insertProductFav(productItem)
+        }    }
+
+    fun deletFav(productItem: DataX) {
+        GlobalScope.launch {
+            room.deleteProductFav(productItem)
+
+        }
     }
 
 }
