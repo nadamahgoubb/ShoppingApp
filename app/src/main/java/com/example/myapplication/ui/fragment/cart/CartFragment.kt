@@ -35,11 +35,13 @@ class CartFragment : Fragment(), IItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = activity?.let { ViewModelProvider(it).get(CartViewModel::class.java) }!!
-
         viewModel.getData().observe(this, {
             adapter.setCartList(it)
             adapter.notifyDataSetChanged()
         })
+    }
+
+    private fun initView() {
     }
 
 
@@ -54,6 +56,7 @@ class CartFragment : Fragment(), IItemClickListener {
             container,
             false
         )
+        initView()
         initRec()
         viewModel.getData()
         return binding.root

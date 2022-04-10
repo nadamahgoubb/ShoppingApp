@@ -12,7 +12,7 @@ import com.example.myapplication.data.entitiy.DataX
  *
  * @Created by NADA
  */
-@Database(entities = [DataX::class,CartDataEntity::class], version = 2, exportSchema = true)
+@Database(entities = [DataX::class,CartDataEntity::class], version = 3, exportSchema = true)
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 
