@@ -1,7 +1,7 @@
 package com.example.myapplication.data.network
 
-import com.example.myapplication.Resource
 import com.example.myapplication.data.entitiy.BannerModel
+import com.example.myapplication.data.entitiy.category.CategoryModel
 import com.example.myapplication.data.entitiy.ProductModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,10 +9,10 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface ApiInterface {
-   /* //Categories
+    //Categories
     @GET("categories")
-    suspend fun getCategories(@Header("lang") lang: String): MainModel
-
+    suspend fun getCategories(@Header("lang") lang: String): Response<CategoryModel>
+/*
     //banners
     @GET("banners")
     suspend fun getBanners(): BannerModel

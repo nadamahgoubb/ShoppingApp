@@ -8,15 +8,23 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.myapplication.ui.fragment.home.HomeFragment"
-        android:title="HomeFragment" />
+        android:title="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.myapplication.ui.fragment.cart.CartFragment"
         android:title="Cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.example.myapplication.ui.fragment.CategoryFragment"
+        android:name="com.example.myapplication.ui.fragment.category.CategoryFragment"
         android:title="Category fragment"
         tools:layout="@layout/fragment_category" />
     <fragment
@@ -37,5 +45,13 @@
         android:id="@+id/wishListFragment"
         android:name="com.example.myapplication.ui.fragment.wishList.WishListFragment"
         android:label="fragment_wish_list"
-        tools:layout="@layout/fragment_wish_list" />
+        tools:layout="@layout/fragment_wish_list" >
+        <action
+            android:id="@+id/action_wishListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.myapplication.ui.fragment.detail.DetailFragment"
+        android:label="DetailFragment" />
 </navigation>

@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.CartDataEntity
@@ -83,14 +86,18 @@ class WishListFragment : Fragment(), IItemClickListener {
     }
 
     private fun showDetails(item: DataX) {
-        val detailFragment = DetailFragment(item)
+       /* val detailFragment = DetailFragment(item)
         activity?. supportFragmentManager?.let {
             FragmentUtil.replaceFragment(
                 detailFragment,
                 R.id.FragmentLoad,
                 it?.beginTransaction()
             )
-        }
+        }*/
+        val bundle = bundleOf("Key" to item)
+        findNavController().navigate(R.id.action_wishListFragment_to_detailFragment, bundle)
+
+
     }
 
     private fun addToCart(item: DataX) {

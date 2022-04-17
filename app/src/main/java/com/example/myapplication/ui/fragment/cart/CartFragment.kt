@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.CartDataEntity
@@ -15,8 +17,6 @@ import com.example.myapplication.data.local.RoomDao
 import com.example.myapplication.databinding.FragmentCartBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.CartListAdapter
-import com.example.myapplication.ui.fragment.detail.DetailFragment
-import com.example.myapplication.utils.FragmentUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -91,13 +91,10 @@ class CartFragment : Fragment(), IItemClickListener {
             item.old_price,
             item.price
         )
-        val detailFragment = DetailFragment(cartItem)
-        activity?.supportFragmentManager?.let {
-            FragmentUtil.replaceFragment(
-                detailFragment,
-                R.id.FragmentLoad,
-                it?.beginTransaction()
-            )
-        }
+
+        val bundle = bundleOf("Key" to cartItem)
+        findNavController().navigate(R.id.action_cartFragment_to_detailFragment, bundle)
+
+
     }
 }

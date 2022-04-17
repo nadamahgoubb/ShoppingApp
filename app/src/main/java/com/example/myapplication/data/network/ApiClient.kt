@@ -16,7 +16,7 @@ class ApiClient {
 
 
     fun getClient( /*String portNumber*/
-        base: ApiBase
+        base: String
     ): Retrofit? {
         val gson: Gson = GsonBuilder()
             .setLenient()

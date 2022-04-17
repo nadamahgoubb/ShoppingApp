@@ -13,8 +13,8 @@ import com.example.myapplication.data.entitiy.DataX
 import com.example.myapplication.databinding.FragmentDetailBinding
 import kotlinx.android.synthetic.main.fragment_detail.*
 
-class DetailFragment constructor(var product: DataX) : Fragment(), View.OnClickListener {
-
+class DetailFragment constructor() : Fragment(), View.OnClickListener {
+    private lateinit var product: DataX
     private lateinit var binding: FragmentDetailBinding
     private var orderNum = 1
     private lateinit var detailVm: DetailViewModel
@@ -34,6 +34,7 @@ class DetailFragment constructor(var product: DataX) : Fragment(), View.OnClickL
             container,
             false
         )
+         product = arguments?.getParcelable<DataX>("Key")!!
         initView()
         initData()
         return binding.root

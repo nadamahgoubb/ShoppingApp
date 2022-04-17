@@ -2,30 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_category"
+        android:id="@+id/categoryFragment"
         android:enabled="true"
         android:icon="@drawable/ic_category"
         android:title="@string/category"
        />
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/accountFragment"
         android:enabled="true"
         android:icon="@drawable/ic_user"
         android:title="@string/title_account"
        />
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeFragment"
         android:enabled="false"
         android:title="" />
 
     <item
-        android:id="@+id/navigation_cart"
+        android:id="@+id/cartFragment"
         android:enabled="true"
         android:icon="@drawable/ic_cart"
         android:title="@string/cart" />
     <item
-        android:id="@+id/navigation_info"
+        android:id="@+id/infoFragment"
         android:enabled="true"
         android:icon="@drawable/ic_info"
         android:title="@string/title_information"

@@ -19,16 +19,5 @@ class CartViewModel @Inject constructor(var room: RoomDao) : ViewModel() {
         return cartList
     }
 
-    fun addToCart(cartItem: CartDataEntity) {
-        GlobalScope.launch {
-            room.insertInCart(cartItem)
-        }
-    }
-    suspend fun removeFromCart(cartItem: CartDataEntity) {
-        room.deleteFromCart(cartItem)
-    }
-    suspend fun removeAll() {
-        room.deleteAllCart()
-    }
 
 }

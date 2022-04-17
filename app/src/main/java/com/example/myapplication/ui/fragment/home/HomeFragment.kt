@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -222,14 +224,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
 
         })
         dialogBinding?.ivFavoriteDetails?.setOnClickListener(View.OnClickListener {
-            val detailFragment = DetailFragment(productItem)
-            activity?.supportFragmentManager?.let {
-                FragmentUtil.replaceFragment(
-                    detailFragment,
-                    R.id.FragmentLoad,
-                    it?.beginTransaction()
-                )
-            }
+            val bundle = bundleOf("Key" to productItem)
+            findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+
+            /* val detailFragment = DetailFragment(productItem)
+             activity?.supportFragmentManager?.let {
+                 FragmentUtil.replaceFragment(
+                     detailFragment,
+                     R.id.FragmentLoad,
+                     it?.beginTransaction()
+                 )
+             }*/
         })
     }
 }

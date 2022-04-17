@@ -1,13 +1,11 @@
 package com.example.myapplication
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.entitiy.BannerModel
 import com.example.myapplication.data.entitiy.ProductModel
 import com.example.myapplication.data.network.ApiBase
 import com.example.myapplication.data.network.ApiClient
 import com.example.myapplication.data.network.ApiInterface
-import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Response
 
 class RepoHome(context: Context) {
@@ -19,7 +17,7 @@ class RepoHome(context: Context) {
     init {
         apiClient = ApiClient()
         apiInterface =
-            apiClient!!.getClient(ApiBase.BASE_URL)!!.create(ApiInterface::class.java)
+            apiClient!!.getClient(ApiBase.baseUrl)!!.create(ApiInterface::class.java)
        // generalDb= GeneralDataBase.getDataClient(context)
     }
 /*
