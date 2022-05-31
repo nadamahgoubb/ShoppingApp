@@ -52,6 +52,7 @@ class CategoryAdapter constructor(
             }
         }
     }
+
     fun getCategoryList(): List<DataX?> {
         return list
     }
@@ -74,9 +75,7 @@ class CategoryAdapter constructor(
         holder.bind(currentItem)
 
     }
-    fun getProductList(): List<DataX?> {
-        return list
-    }
+
 
     override fun getItemCount(): Int {
         return list.size

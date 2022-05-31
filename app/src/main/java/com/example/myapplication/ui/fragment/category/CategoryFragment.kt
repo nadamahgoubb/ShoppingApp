@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.local.RoomDao
@@ -49,7 +50,7 @@ class CategoryFragment : Fragment(), IItemClickListener {
     private fun initRec() {
 
         adapter = CategoryAdapter(roomDao, requireContext(), this)
-        val layoutManager = LinearLayoutManager(activity)
+            val layoutManager = GridLayoutManager(activity,2)
         binding.recCartList.layoutManager = layoutManager
         binding.recCartList.setHasFixedSize(true)
         binding.recCartList.adapter = adapter

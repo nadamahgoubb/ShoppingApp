@@ -22,7 +22,7 @@ class ProductAdapter constructor(
     val context: Context,
     private val onClick: IItemClickListener
 ) :
-    RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
+    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
     private var productsList: ArrayList<DataX> = ArrayList()
     var productsSearchList: ArrayList<DataX> = ArrayList()
     fun getProductList(): List<DataX?> {
@@ -94,35 +94,5 @@ class ProductAdapter constructor(
 
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charString = constraint?.toString() ?: ""
-                productsSearchList = if (charString.isEmpty()) productsList else {
-                    val filteredList = ArrayList<DataX>()
-                    productsList
-                        .filter {
-                            it.name!!.lowercase().startsWith(charString, false)
-                        }
-                        .forEach { filteredList.add(it) }
-                    filteredList
-
-                }
-                return FilterResults().apply { values = productsSearchList }
-
-
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
-                productsSearchList = if (results?.values == null)
-                    ArrayList()
-                else
-                    results.values as ArrayList<DataX>
-                notifyDataSetChanged()
-            }
-        }
-    }
 
 }

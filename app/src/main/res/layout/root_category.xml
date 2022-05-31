@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Crd_Offers"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp"
@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/img_category"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             app:layout_constraintTop_toTopOf="parent" />

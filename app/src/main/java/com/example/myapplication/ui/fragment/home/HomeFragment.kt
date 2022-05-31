@@ -44,6 +44,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
     private lateinit var adapter: ProductAdapter
     private var slidingImageAdapter: SlidingAdapter? = null
     private var urls: MutableList<String> = mutableListOf()
+    var isLoading = false
 
     @Inject
     lateinit var roomDao: RoomDao
@@ -114,8 +115,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
                 }
             }
         })
-        //    val mDialogFavorite: CheckBox = dialog.findViewById(R.id.iv_favorite_dialog)
-
     }
 
     fun initSlider(urls: MutableList<String>) {
@@ -145,10 +144,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
     }
 
 
-    var isError = false
-    var isLoading = false
-    var isLastPage = false
-    var isScrolling = false
+
 
     fun RecyclerView.init(
         context: Context?,
@@ -226,15 +222,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
         dialogBinding?.ivFavoriteDetails?.setOnClickListener(View.OnClickListener {
             val bundle = bundleOf("Key" to productItem)
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
-
-            /* val detailFragment = DetailFragment(productItem)
-             activity?.supportFragmentManager?.let {
-                 FragmentUtil.replaceFragment(
-                     detailFragment,
-                     R.id.FragmentLoad,
-                     it?.beginTransaction()
-                 )
-             }*/
         })
     }
 }
