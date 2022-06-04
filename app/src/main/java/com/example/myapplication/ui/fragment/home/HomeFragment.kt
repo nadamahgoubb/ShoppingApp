@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,8 +24,6 @@ import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.databinding.LayHomeDialogBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.SlidingAdapter
-import com.example.myapplication.ui.fragment.detail.DetailFragment
-import com.example.myapplication.utils.FragmentUtil
 import com.example.shopping.ui.adapter.ProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -61,14 +59,21 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             container,
             false
         )
-       // viewModel = activity?.let { ViewModelProvider(it).get(WishListViewModel::class.java) }!!
 
-        homeVm = activity?.let { ViewModelProvider(it).get(HomeViewModel::class.java) }!!
         activity?.let { homeVm.setActivity(it) }
-
+        setVm()
         initViews()
 
         return binding.root
+    }
+
+    private fun setVm() = {
+        with(binding) {
+            withFragment(this)
+            binding.vm = this@HomeFragment.homeVm
+            binding.lifecycleOwner = this.lifecycleOwner
+        }
+
     }
 
     private fun initViews() {
@@ -224,4 +229,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
         })
     }
+}
+
+fun Fragment.withFragment(dataBinding: ViewDataBinding) {
+    dataBinding.lifecycleOwner = this.viewLifecycleOwner
 }

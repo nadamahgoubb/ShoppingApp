@@ -1,10 +1,9 @@
-package com.example.myapplication
+package com.example.myapplication.data.repo
 
 import android.content.Context
 import com.example.myapplication.data.entitiy.BannerModel
 import com.example.myapplication.data.entitiy.ProductModel
 import com.example.myapplication.data.network.ApiBase
-import com.example.myapplication.data.network.ApiClient
 import com.example.myapplication.data.network.ApiInterface
 import retrofit2.Response
 
@@ -15,17 +14,12 @@ class RepoHome(context: Context) {
 
 
     init {
-        apiClient = ApiClient()
+            apiClient = ApiClient()
         apiInterface =
             apiClient!!.getClient(ApiBase.baseUrl)!!.create(ApiInterface::class.java)
        // generalDb= GeneralDataBase.getDataClient(context)
     }
-/*
-   /* fun getBanners(): MutableStateFlow<List<BannerDatum>> {
-        return bannersList
-    }
-    */
- */
+
 
 
     suspend fun getProduct(): Response<ProductModel>{

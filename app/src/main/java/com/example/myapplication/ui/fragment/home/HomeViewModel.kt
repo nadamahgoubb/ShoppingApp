@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.RepoHome
+import com.example.myapplication.data.repo.RepoHome
 import com.example.myapplication.Resource
 import com.example.myapplication.data.entitiy.*
 import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.domain.IProductsRepository
 import com.example.myapplication.utils.NetworkConnectivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
@@ -17,8 +18,11 @@ import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 @HiltViewModel
-class HomeViewModel @Inject constructor(var room: RoomDao) : ViewModel() {
-    private lateinit var repo: RepoHome
+class HomeViewModel @Inject constructor(
+    var room: RoomDao,
+    private val productsRepository: IProductsRepository
+) : ViewModel() {
+   // private lateinit var repo: RepoHome
     private lateinit var context: Context
 
     var productsList: MutableLiveData<Resource<List<DataX>>> = MutableLiveData()
