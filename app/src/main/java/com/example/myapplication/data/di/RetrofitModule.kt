@@ -1,7 +1,7 @@
 package com.example.myapplication.data.di
 
-import com.example.myapplication.data.network.ApiBase
-import com.example.myapplication.data.network.ApiInterface
+import com.example.myapplication.data.soure.remote.ApiBase
+import com.example.myapplication.data.soure.remote.ApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

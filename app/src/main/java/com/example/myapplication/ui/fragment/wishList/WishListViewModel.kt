@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.entitiy.CartDataEntity
 import com.example.myapplication.data.entitiy.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

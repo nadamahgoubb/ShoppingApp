@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.myapplication.data.entitiy.CartDataEntity
 import com.example.myapplication.data.entitiy.DataX
+import com.example.myapplication.data.soure.local.RoomDao
 
 /**
  * To manage data items that can be accessed, updated

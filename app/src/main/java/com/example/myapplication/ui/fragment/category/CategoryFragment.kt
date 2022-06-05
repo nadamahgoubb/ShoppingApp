@@ -8,13 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.databinding.FragmentCategoryBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.CategoryAdapter
-import com.example.myapplication.ui.fragment.cart.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

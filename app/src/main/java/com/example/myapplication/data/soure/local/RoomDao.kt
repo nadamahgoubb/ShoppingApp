@@ -1,4 +1,4 @@
-package com.example.myapplication.data.local
+package com.example.myapplication.data.soure.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

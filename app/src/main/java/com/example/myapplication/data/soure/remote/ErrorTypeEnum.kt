@@ -1,4 +1,4 @@
-package com.example.myapplication.data.network
+package com.example.myapplication.data.soure.remote
 
 enum class ErrorTypeEnum(val value: Int) {
     noError(0),

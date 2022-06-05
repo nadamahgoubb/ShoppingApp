@@ -6,12 +6,10 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.data.entitiy.DataX
 import com.example.myapplication.databinding.RootProductBinding
 import com.example.myapplication.ui.IItemClickListener

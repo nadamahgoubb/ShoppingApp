@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.CartDataEntity
 import com.example.myapplication.data.entitiy.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.databinding.FragmentCartBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.CartListAdapter

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.category.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.databinding.RootCategoryBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.utils.Extension.loadImage

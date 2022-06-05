@@ -1,4 +1,4 @@
-package com.example.myapplication.data.network
+package com.example.myapplication.data.soure.remote
 
 interface GeneralListener<T> {
     fun getApiResponse(

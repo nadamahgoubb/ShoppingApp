@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.CartDataEntity
 import com.example.myapplication.data.entitiy.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.databinding.FragmentWishListBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.ui.adapter.WishListAdapter
-import com.example.myapplication.ui.fragment.detail.DetailFragment
-import com.example.myapplication.utils.FragmentUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject

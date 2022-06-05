@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.repo.RepoHome
 import com.example.myapplication.Resource
 import com.example.myapplication.data.entitiy.*
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.domain.IProductsRepository
+import com.example.myapplication.domain.useCase.showAllBanners
+import com.example.myapplication.domain.useCase.showAllProducts
 import com.example.myapplication.utils.NetworkConnectivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     var room: RoomDao,
@@ -37,7 +39,7 @@ class HomeViewModel @Inject constructor(
 
     fun setActivity(context: Context) {
         this.context = context
-        repo = RepoHome(context)
+ //       repo = RepoHome(context)
     }
 
     suspend fun getBanners(): MutableStateFlow<Resource<List<DataBanner>>> {
@@ -45,7 +47,7 @@ class HomeViewModel @Inject constructor(
         try {
             if (NetworkConnectivity.hasInternetConnection(context)) {
                 viewModelScope.launch {
-                    val response = repo.getBanners()
+                    val response = showAllBanners(productsRepository)
                     bannerList.emit(handleBannerResponse(response))
                 }
             } else {
@@ -85,7 +87,9 @@ class HomeViewModel @Inject constructor(
         try {
             if (NetworkConnectivity.hasInternetConnection(context)) {
                 viewModelScope.launch {
-                    val response = repo.getProduct()
+                    val response = showAllProducts(productsRepository)
+
+                  //  val response = repo.getProduct()
                     productsList.postValue(handleResponse(response))
                 }
             } else {

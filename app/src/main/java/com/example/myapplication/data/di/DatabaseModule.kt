@@ -3,7 +3,7 @@ package com.example.myapplication.data.di
 import android.app.Application
 import androidx.room.Room
 import com.example.myapplication.data.local.AppDatabase
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

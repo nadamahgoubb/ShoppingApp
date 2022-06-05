@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.Resource
 import com.example.myapplication.data.entitiy.category.CategoryModel
 import com.example.myapplication.data.entitiy.category.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.data.repo.CategoryRepo
 import com.example.myapplication.utils.NetworkConnectivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryViewModel @Inject constructor(var room: RoomDao ,var repo: CategoryRepo) : ViewModel() {
+class CategoryViewModel @Inject constructor(var room: RoomDao, var repo: CategoryRepo) : ViewModel() {
 
     private lateinit var context: Context
     fun setActivity(context: Context) {

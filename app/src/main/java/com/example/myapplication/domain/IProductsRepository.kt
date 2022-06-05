@@ -9,3 +9,9 @@ interface IProductsRepository {
     suspend fun getProduct(): Response<ProductModel>
     suspend fun getBanners(): Response<BannerModel>
 }
+
+interface IProductsDataSource {
+
+    suspend fun getProduct(): Response<ProductModel>
+    suspend fun getBanners(): Response<BannerModel>
+}

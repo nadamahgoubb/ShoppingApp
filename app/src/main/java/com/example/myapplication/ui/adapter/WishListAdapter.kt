@@ -2,16 +2,13 @@ package com.example.myapplication.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.entitiy.DataX
-import com.example.myapplication.data.local.RoomDao
+import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.databinding.RootWishListBinding
 import com.example.myapplication.ui.IItemClickListener
 import com.example.myapplication.utils.Extension.loadImage

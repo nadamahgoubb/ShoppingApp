@@ -1,4 +1,4 @@
-package com.example.myapplication.data.network
+package com.example.myapplication.data.soure.remote
 
 import com.example.myapplication.data.entitiy.BannerModel
 import com.example.myapplication.data.entitiy.category.CategoryModel
