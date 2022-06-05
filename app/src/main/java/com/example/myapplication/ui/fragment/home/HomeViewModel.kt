@@ -31,6 +31,7 @@ class HomeViewModel @Inject constructor(
     var productResponse: List<DataX>? = null
 
 
+
     var bannerList: MutableStateFlow<Resource<List<DataBanner>>> = MutableStateFlow(Resource.Loading())
 
     var bannerResponse: List<DataBanner>? = null
@@ -90,7 +91,7 @@ class HomeViewModel @Inject constructor(
                     val response = showAllProducts(productsRepository)
 
                   //  val response = repo.getProduct()
-                    productsList.postValue(handleResponse(response))
+                    productsList.postValue(response?.let { handleResponse(it) })
                 }
             } else {
              productsList.postValue(Resource.Error("No internet connection"))

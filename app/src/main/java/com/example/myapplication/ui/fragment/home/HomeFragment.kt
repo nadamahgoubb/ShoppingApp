@@ -60,9 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             false
         )
 
-        activity?.let { homeVm.setActivity(it) }
         setVm()
-        initViews()
 
         return binding.root
     }
@@ -73,6 +71,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
             binding.vm = this@HomeFragment.homeVm
             binding.lifecycleOwner = this.lifecycleOwner
         }
+        activity?.let { homeVm.setActivity(it) }
+        initViews()
 
     }
 

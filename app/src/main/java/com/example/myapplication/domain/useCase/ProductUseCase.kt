@@ -8,7 +8,7 @@ import retrofit2.Response
 
 suspend fun showAllProducts(
     productsRepo: IProductsRepository
-): Response<ProductModel> =
+): Response<ProductModel>? =
     productsRepo.getProduct()
 
 

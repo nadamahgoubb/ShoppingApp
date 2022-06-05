@@ -9,18 +9,13 @@ import retrofit2.Response
 
 class RepoHome(context: Context) {
 
-    private var apiClient: ApiClient? = null
+ //   private var apiClient: ApiClient? = null
     private var apiInterface: ApiInterface? = null
 
 
-    init {
-            apiClient = ApiClient()
-        apiInterface =
-            apiClient!!.getClient(ApiBase.baseUrl)!!.create(ApiInterface::class.java)
-       // generalDb= GeneralDataBase.getDataClient(context)
-    }
 
 
+/*
 
     suspend fun getProduct(): Response<ProductModel>{
         return apiInterface!!.getProducts("en")
@@ -28,6 +23,7 @@ class RepoHome(context: Context) {
     suspend fun getBanners(): Response<BannerModel>{
         return apiInterface!!.getBanners()
     }
+*/
 
 
 }

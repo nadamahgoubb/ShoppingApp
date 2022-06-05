@@ -6,11 +6,10 @@ import com.example.myapplication.data.soure.local.RoomDao
 import com.example.myapplication.data.soure.remote.ApiInterface
 import com.example.myapplication.domain.IProductsDataSource
 import retrofit2.Response
+import javax.inject.Inject
 
 
-class ProductsLocalDataSource  @Inject constructor(
-    private val roomDao: RoomDao
-) :IProductsDataSource{
+class ProductsLocalDataSource  () :IProductsDataSource{
     override suspend fun getProduct(): Response<ProductModel> {
         TODO("Not yet implemented")
     }
