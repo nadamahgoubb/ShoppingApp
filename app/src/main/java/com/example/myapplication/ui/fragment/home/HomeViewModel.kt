@@ -18,13 +18,15 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     var room: RoomDao,
-    private val productsRepository: IProductsRepository
+    private val productsRepository: IProductsRepository,
+    var hasInternetConnection: Boolean
 ) : ViewModel() {
-   // private lateinit var repo: RepoHome
+    // private lateinit var repo: RepoHome
     private lateinit var context: Context
 
     var productsList: MutableLiveData<Resource<List<DataX>>> = MutableLiveData()
@@ -37,19 +39,18 @@ class HomeViewModel @Inject constructor(
     var bannerResponse: List<DataBanner>? = null
 
 
-
     fun setActivity(context: Context) {
         this.context = context
- //       repo = RepoHome(context)
+        //       repo = RepoHome(context)
     }
 
     suspend fun getBanners(): MutableStateFlow<Resource<List<DataBanner>>> {
-    //   productsList.postValue(Resource.Loading())
+        //   productsList.postValue(Resource.Loading())
         try {
             if (NetworkConnectivity.hasInternetConnection(context)) {
                 viewModelScope.launch {
                     val response = showAllBanners(productsRepository)
-                    bannerList.emit(handleBannerResponse(response))
+                    response?.let { handleBannerResponse(it) }?.let { bannerList.emit(it) }
                 }
             } else {
                 bannerList.emit(Resource.Error("No internet connection"))
@@ -67,7 +68,7 @@ class HomeViewModel @Inject constructor(
         return bannerList
     }
 
-    private fun handleBannerResponse(response: Response<BannerModel>): Resource<List<DataBanner>>{
+    private fun handleBannerResponse(response: Response<BannerModel>): Resource<List<DataBanner>> {
         if (response.isSuccessful) {
             response.body().let { it ->
                 if (bannerResponse == null) {
@@ -78,23 +79,23 @@ class HomeViewModel @Inject constructor(
                 return bannerResponse?.let { it1 -> Resource.Success(it1) }!!
             }
 
-        }else return Resource.Error(response.message())
+        } else return Resource.Error(response.message())
 
     }
 
 
     fun getProducts(): MutableLiveData<Resource<List<DataX>>> {
-      //  productsList.postValue(Resource.Loading())
+        //  productsList.postValue(Resource.Loading())
         try {
             if (NetworkConnectivity.hasInternetConnection(context)) {
                 viewModelScope.launch {
                     val response = showAllProducts(productsRepository)
 
-                  //  val response = repo.getProduct()
+                    //  val response = repo.getProduct()
                     productsList.postValue(response?.let { handleResponse(it) })
                 }
             } else {
-             productsList.postValue(Resource.Error("No internet connection"))
+                productsList.postValue(Resource.Error("No internet connection"))
 
             }
 
@@ -121,19 +122,21 @@ class HomeViewModel @Inject constructor(
                 return productResponse?.let { it1 -> Resource.Success(it1) }!!
             }
 
-        }else return Resource.Error(response.message())
+        } else return Resource.Error(response.message())
 
     }
+
     fun addToCart(cartItem: CartDataEntity) {
-      GlobalScope.launch {
-          room.insertInCart(cartItem)
-      }
+        GlobalScope.launch {
+            room.insertInCart(cartItem)
+        }
     }
 
-    fun insertFav(productItem:DataX) {
+    fun insertFav(productItem: DataX) {
         GlobalScope.launch {
             room.insertProductFav(productItem)
-        }    }
+        }
+    }
 
     fun deletFav(productItem: DataX) {
         GlobalScope.launch {

@@ -14,7 +14,7 @@ suspend fun showAllProducts(
 
 suspend fun showAllBanners(
     productsRepo: IProductsRepository
-): Response<BannerModel> =
+): Response<BannerModel> ? =
     productsRepo.getBanners()
 
 

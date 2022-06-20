@@ -24,9 +24,13 @@ class ProductsRemoteDataSource @Inject constructor(
     }
 
 
-    override suspend fun getBanners(): Response<BannerModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getBanners(): Response<BannerModel> ? {
+        return try {
+            return apiInterface.getBanners()
+        } catch (e: Exception) {
+            Log.d("getBanners ",e.message.toString())
+            return  null
+        }    }
 
 }
 

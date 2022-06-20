@@ -4,11 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 class NetworkConnectivity {
     companion object {
-        fun hasInternetConnection(context:Context): Boolean {
-            val connectivityManager = context.applicationContext.getSystemService(
+        fun hasInternetConnection(@ApplicationContext  application: Context): Boolean {
+            val connectivityManager = application.applicationContext.getSystemService(
                 Context.CONNECTIVITY_SERVICE
             ) as ConnectivityManager
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

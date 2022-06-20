@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +52,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //0 n  val matcher = Pattern.compile(ch.toString()).matcher(s)
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -65,14 +65,15 @@ class HomeFragment : Fragment(R.layout.fragment_home), IItemClickListener {
         return binding.root
     }
 
-    private fun setVm() = {
+    private fun setVm()  {
         with(binding) {
             withFragment(this)
-            binding.vm = this@HomeFragment.homeVm
+          //  binding.vm = this@HomeFragment.homeVm
             binding.lifecycleOwner = this.lifecycleOwner
+            homeVm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+            activity?.let { homeVm.setActivity(it) }
         }
-        activity?.let { homeVm.setActivity(it) }
-        initViews()
+       initViews()
 
     }
 

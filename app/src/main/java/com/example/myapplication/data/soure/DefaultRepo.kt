@@ -8,8 +8,7 @@ import javax.inject.Inject
 class DefaultRepo @Inject constructor(
     private val productsRemoteDataSource: IProductsDataSource,
     private val productsLocalDataSource: IProductsDataSource,
-    // private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : IProductsRepository {
+    ) : IProductsRepository {
 
     override suspend fun getProduct()= productsRemoteDataSource.getProduct()
 

@@ -9,6 +9,7 @@ import com.example.myapplication.domain.IProductsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -24,22 +25,14 @@ class AppModul() {
         api: ApiInterface
     ): IProductsDataSource = ProductsRemoteDataSource(api)
 
-/*
-    @Singleton
-    @Provides
-    fun provideIProductsDataSource(
-        api: ApiInterface
-    ): IProductsDataSource = ProductsRemoteDataSource(api)
-*/
-
 
     @Singleton
     @Provides
     fun provideDefaultProductRepository(
         @RemoteProductDataSource remote: IProductsDataSource,
         @LocalProductDataSource local: IProductsDataSource
-    ) = DefaultRepo(remote, local) as IProductsRepository
-
+    )
+    = DefaultRepo(remote, local ) as IProductsRepository
     @LocalProductDataSource
     @Singleton
     @Provides

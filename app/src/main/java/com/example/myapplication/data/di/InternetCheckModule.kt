@@ -16,7 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object InternetCheckModule {
 
-    @Singleton
     @Provides
     fun hasInternetConnection(  @ApplicationContext application: Context): Boolean {
         val connectivityManager = application.applicationContext.getSystemService(

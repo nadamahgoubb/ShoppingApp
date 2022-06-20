@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
-
+    <action
+        android:id="@+id/action_to_homeFragment"
+        app:destination="@id/homeFragment" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.myapplication.ui.fragment.home.HomeFragment"

@@ -5,15 +5,17 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.fragment.home.HomeFragment
 import com.example.myapplication.utils.CurvedBottomNavigationView
-import com.example.myapplication.utils.FragmentUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -48,11 +50,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (p0 != null) {
             homeFragment = HomeFragment()
             if (p0.id == fab_button.id) {
-                FragmentUtil.replaceFragment(
-                    homeFragment,
-                    R.id.FragmentLoad,
-                    supportFragmentManager.beginTransaction()
-                )
+
+                val navController: NavController =
+                    Navigation.findNavController(this@MainActivity, R.id.navHostFragment)
+                navController.navigateUp()
+                navController.navigate(R.id.action_to_homeFragment)
+
+
             }
         }
     }
